@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VideoRental.Data;
 using VideoRental.Models;
 
 namespace VideoRental.Controllers
@@ -10,19 +11,36 @@ namespace VideoRental.Controllers
                 new Customer(){Id = 2,Name = "Chilip" },
                 new Customer(){Id = 3,Name = "Dilip" },
 
-                };
+         };
+
+        private ApplicationDbContext _context;
+
+        public CustomersController(ApplicationDbContext applicationDbContext)
+        {
+            _context = applicationDbContext;
+        }
+
 
         public IActionResult Index()
         {
+            var customers = _context.Customers.ToList();
+            return View(customers);
 
-            return View(cust1.Where(c=>c.Id==11));
+            
         }
 
         public IActionResult Customer(int Id)
         {
-            var customer = cust1.Where(c => c.Id == Id).FirstOrDefault();
+            var customers = _context.Customers.SingleOrDefault();
 
-            return View(customer);
+            if (customers!=null)
+            {
+                return View(customers);
+            }
+            else
+            {
+                return Content("Not found");
+            }
         }
 
     }
