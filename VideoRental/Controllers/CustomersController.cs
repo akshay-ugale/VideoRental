@@ -23,7 +23,7 @@ namespace VideoRental.Controllers
             
         }
 
-        public IActionResult Customer(int Id)
+        public IActionResult Details(int Id)
         {
             var customers = _context.Customers.Include(c => c.MembershipType).Where(c=> c.Id == Id).SingleOrDefault();
 

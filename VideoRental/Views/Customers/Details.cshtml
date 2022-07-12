@@ -1,0 +1,16 @@
+﻿@model VideoRental.Models.Customer
+ 
+<h1>@Model.Name</h1>
+<ul>
+	<li>Memebership Type : @Model.MembershipType.Name</li>
+
+	@if (!@Model.BirthDate)
+	{
+		<li>@Model.BirthDate</li>
+	}
+</ul>
+
+
+<br />
+<p>@Html.ActionLink("Back","Index","Customers")</p>
+	

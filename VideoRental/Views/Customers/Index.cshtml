@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
              <th>
-               Discount Rate
+               Membership Type
             </th>
         </tr>
     </thead>
@@ -24,10 +24,10 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.ActionLink(item.Name,"Customer","Customers",new {Id=item.Id})
+                @Html.ActionLink(item.Name,"Details","Customers",new {Id=item.Id})
             </td>
             <td>
-                @item.MembershipType.DiscountRate
+                @item.MembershipType.Name
             </td>
         </tr>
     }
