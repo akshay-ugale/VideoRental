@@ -11,5 +11,6 @@ namespace VideoRental.Data
         }
         public DbSet<VideoRental.Models.Customer>? Customers { get; set; }
         public DbSet<VideoRental.Models.Movie>? Movies { get; set; }
+         
     }
 }

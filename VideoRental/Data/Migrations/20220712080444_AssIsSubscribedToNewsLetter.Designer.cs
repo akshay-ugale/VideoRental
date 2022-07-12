@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideoRental.Data;
 
@@ -11,9 +12,10 @@ using VideoRental.Data;
 namespace VideoRental.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220712080444_AssIsSubscribedToNewsLetter")]
+    partial class AssIsSubscribedToNewsLetter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,37 +237,13 @@ namespace VideoRental.Migrations
                     b.Property<bool>("IsSubbscribedToNewsletter")
                         .HasColumnType("bit");
 
-                    b.Property<byte>("MembershipTypeId")
-                        .HasColumnType("tinyint");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MembershipTypeId");
-
                     b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("VideoRental.Models.MembershipType", b =>
-                {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("DiscountRate")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("DurationInMonths")
-                        .HasColumnType("tinyint");
-
-                    b.Property<short>("SignUpFee")
-                        .HasColumnType("smallint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MembershipType");
                 });
 
             modelBuilder.Entity("VideoRental.Models.Movie", b =>
@@ -334,17 +312,6 @@ namespace VideoRental.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("VideoRental.Models.Customer", b =>
-                {
-                    b.HasOne("VideoRental.Models.MembershipType", "MembershipType")
-                        .WithMany()
-                        .HasForeignKey("MembershipTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MembershipType");
                 });
 #pragma warning restore 612, 618
         }
